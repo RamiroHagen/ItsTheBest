@@ -1,0 +1,299 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans&family=Quicksand&display=swap');
+@font-face {
+    font-family:FuentePrincipal;
+    src: url(../Font/Deep\ Shadow.ttf);
+}
+
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+h1{
+    font-family: FuentePrincipal;
+    font-size: xx-large;
+    padding-bottom: 15px;
+    color: aliceblue;
+    text-align: center;
+}
+
+h2,a{
+    font-family: 'Alumni Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-size: x-large;
+}
+
+h2{
+    color: aliceblue;
+    text-align: center;
+}
+
+h3{
+    font-family: FuentePrincipal;
+    font-size: large;
+    color: rgb(0, 0, 0); 
+}
+
+a,p{
+    text-decoration: none;
+    color: rgb(52, 1, 70);
+}
+
+body{
+
+    min-height: 100vh;
+}
+
+.NavPrincipal{
+    position: fixed;
+    font-family: 'Fjalla One', sans-serif;
+    z-index: 3;
+    width: 100vw;
+    background-color: rgb(241, 241, 241);
+}
+
+
+#Botonera li a{
+    color: rgb(52, 1, 70);
+    border-radius: 8px;
+}
+
+#Botonera li a:hover{
+    background: linear-gradient(171deg, rgba(253,29,162,1) 4%, rgba(131,58,180,1) 37%, rgba(35,6,54,1) 69%);
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.5s;
+
+}
+
+.navbarItsTheBest{
+    display: flex;
+    align-items: center;
+}
+
+.logoTexto{
+    font-family: FuentePrincipal;
+    font-size: large;
+    color: rgb(0, 0, 0);
+    padding-top: 20px;
+    margin-left: 6px;
+}
+
+.logo{
+    height: 45px;
+    width: 45px;
+}
+
+.contenedor{
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgb(253,29,162);
+    background: linear-gradient(171deg, rgba(253,29,162,1) 4%, rgba(131,58,180,1) 37%, rgba(35,6,54,1) 69%);
+}
+
+.contenedorTextos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 120px;
+    padding-top: 5%;
+}
+
+.wave{
+    position: absolute;
+    width: 54%;
+    height: 100vh;
+    top: 5px;
+    right: 0;
+    
+}
+
+.contenedorImagen{
+    z-index: 1;
+
+}
+
+.principalIncognito{
+    width: 50%;
+    height: 100%;
+    padding-top: 15%;
+    margin-left: 160px;
+}
+
+.botonesPrincipales{
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.botonJugar{        
+    border-radius: 8px;
+    width: 230px;
+    height: 60px;
+    margin-bottom: 20px;
+
+}
+
+.botonSecundarios{
+    border-radius: 8px;
+    height: auto;
+    width: 210px;
+}
+
+.botonSecundarios:hover{
+    background: linear-gradient(15deg, rgba(71,244,251,1) 0%, rgba(120,123,241,1) 44%, rgba(204,1,255,1) 84%, rgba(232,0,227,1) 100%);
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.botonJugar:hover{
+    background: linear-gradient(15deg, rgba(71,244,251,1) 0%, rgba(120,123,241,1) 44%, rgba(204,1,255,1) 84%, rgba(232,0,227,1) 100%);
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.contenedor2{
+        height: 100vh;
+        width: auto;
+        position: relative;
+        
+}
+
+.card{
+    margin-top: 100px;
+    width: 26%;
+    height: 310px;
+    padding: 15px;
+    border-color: white;
+}
+
+.imagenMain{
+    width: 100px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+.cardMainTexto{ 
+    text-align: center;
+    font-family: 'Alumni Sans', sans-serif;
+    font-family: 'Quicksand', sans-serif;
+    font-size: smaller;
+}
+
+.svgMain1{
+    bottom: 0;
+    left: 0;
+    position: absolute;
+    z-index: 0;
+}
+
+.wave2{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 0;
+}
+
+.card:hover .imagenMain {-webkit-transform:scale(1.4);transform:scale(1.2);
+    transition: all 0.5s;}
+
+
+.fondo{
+    height: 110vh;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgb(142,82,198);
+    background: linear-gradient(198deg, rgba(142,82,198,1) 0%, rgba(40,6,61,1) 0%, rgba(77,27,107,1) 48%, rgba(123,0,150,1) 82%, rgba(222,0,184,1) 100%);
+}
+
+.juego{
+    height: 94vh;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7008928571428572);
+    border-radius: 1rem;
+}
+
+.contenedorJuegoPrincipal{
+    width: 240px;
+    height: 300px;
+    background: linear-gradient(transparent 5%, #ffffff);;
+    position: absolute;
+    border-radius: 1rem;
+    margin-bottom: 20vh;
+}
+
+.cardElementos{
+    position: relative;
+    margin: 10rem;
+    margin-bottom: 46vh;
+    width: 21vw;
+    height: 400px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    border-radius: 2rem;
+}
+
+.imgElementos{
+    position: absolute;
+    width: 281px;
+    height: 400px;
+    border-radius: 1rem;
+    object-fit: cover;
+    background-position: center;
+    background-size: cover;
+    background: linear-gradient(transparent 80%, #ffffff);
+}
+
+.textoElementos{
+    position: absolute;
+    text-align: center;
+    font-size: medium;
+    padding-bottom: 18px;
+}
+
+.rondas{
+    position: absolute;
+    margin-bottom: 35px;
+}
+ 
+.BotonCandidatos{
+    position: absolute;
+    margin-top: 90px;
+    background: linear-gradient(171deg, rgba(253,29,162,1) 4%, rgba(131,58,180,1) 37%, rgba(35,6,54,1) 69%);
+    color: aliceblue;
+    cursor: pointer;
+    transition: all 0.5s;
+    border-radius: 1rem;
+}
+
+.candidatos{
+    position: absolute;
+    width: 700px;
+    height: 90px;
+    margin-top: 425px;
+    border-radius: 1rem;
+    background: #ffffffab ;
+}
+
+.footer{
+    width: 100%;
+    height: 10vh;
+    background-color: rgba(0,0,0);
+}
