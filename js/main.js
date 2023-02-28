@@ -1,3 +1,5 @@
+/////////////////////////////////////////////CLASE CONSTRUCTORA//////////////////////////////////////////////////
+
 class Elementos {
     constructor (nombre, id, img){
     this.nombre = nombre;
@@ -6,6 +8,8 @@ class Elementos {
     this.repeticiones = 0;
     }
 }
+
+//////////////////////////////////////////////CREACION DE OBJETOS/////////////////////////////////////////////////
 
 const elemento1 = new Elementos("Bostezar", 1, "../Multimedia/Objetos/Acciones/bostezar.webp");
 const elemento2 = new Elementos("Cantar", 2, "../Multimedia/Objetos/Acciones/Cantar.webp");
@@ -69,119 +73,134 @@ const elemento59 = new Elementos("Tomar Alcohol", 59, "../Multimedia/Objetos/Acc
 const elemento60 = new Elementos("Tomar Sol", 60, "../Multimedia/Objetos/Acciones/tomarSol.webp");
 const elemento61 = new Elementos("Viajar", 61, "../Multimedia/Objetos/Acciones/viajar.webp");
 
-
+////////////////////////////////////////////////////ARRAYS////////////////////////////////////////////////////////
 
 const arrayAcciones = [elemento1, elemento2, elemento3, elemento4, elemento5, elemento6, elemento7, elemento8, elemento9, elemento10, elemento11, elemento12, elemento13, elemento14, elemento15, elemento16, elemento17, elemento18, elemento19, elemento20, elemento21, elemento22, elemento23, elemento24, elemento25, elemento26, elemento27, elemento28, elemento29, elemento30, elemento31, elemento32, elemento33, elemento34, elemento35, elemento36, elemento37, elemento38, elemento39, elemento40, elemento41, elemento42, elemento43, elemento44, elemento45, elemento46, elemento47, elemento48, elemento49, elemento50, elemento51, elemento52, elemento53, elemento54, elemento55, elemento56, elemento57, elemento58, elemento59, elemento60, elemento61];
 
+///////////////////////////////////////////DECLARACION DE VARIABLES GLOBALES//////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-let iterar = randomArray(arrayAcciones);
-let iterar2 = randomArray(arrayAcciones);
 let cuenta = 0;
+let valor = 0;
 const card1 = document.getElementById("card1");
 const card2 = document.getElementById("card2");
 const contenedorJuego = document.getElementById("contenedorJuego");
-const contador = document.getElementById("contador");
-const boton = document.getElementById("candidatos");
+const candidatos = document.getElementById("candidatos");
 const contenedorCandidatos = document.getElementById("contenedorCandidatos");
+let audio = document.getElementById("audio");
+let playPauseBtn = document.getElementById("playPauseBtn");
 const listaCandidatos = [];
 
-
-
-////////////////////////////////////////MOSTRANDO CARDS/////////////////////////////////////////////////////////
-
-
+//////////////////////////////////////////////////////////CARDS//////////////////////////////////////////////////////////
 
 const mostrarElementos = (Elementos) => {
     card1.classList.add();
     card1.innerHTML = `
                         <div>
                             <button class= "cardElementos" id= "boton${Elementos.id}">
+                                <div class= "transparentTitulos"></div>
                                 <img src= "${Elementos.img}" class="imgElementos" alt="${Elementos.nombre}">
                                 <h3 class= "textoElementos">${(Elementos.nombre.toUpperCase())}</h3>
                             </button>
                         </div>
                     `
-
-    contenedorJuego.appendChild(card1);
-
-    const boton = document.getElementById(`boton${Elementos.id}`);
-    boton.addEventListener("click", () => {
+    
+    contenedorJuego.append(card1);
+    
+    const boton1 = document.getElementById(`boton${Elementos.id}`);
+    boton1.addEventListener("click", () => {
         contadorRondas();
-        accionAumentarRepeticion(Elementos.id);
-        cambiarElemento(Elementos.id);
+        cambiarElemento1(Elementos.id);
+        botonCandidato(Elementos.repeticiones);
     })
 }
-
-
+    
 
 const mostrarElementos2 = (Elementos) => {
     card2.classList.add();
     card2.innerHTML = `
                         <div>
                             <button class= "cardElementos" id= "boton${Elementos.id}">
+                                <div class= "transparentTitulos"></div>
                                 <img src= "${Elementos.img}" class="imgElementos" alt="${Elementos.nombre}">
                                 <h3 class= "textoElementos">${(Elementos.nombre.toUpperCase())}</h3>
                             </button>
                         </div>
                     `
-
-    contenedorJuego.appendChild(card2);
-
-    const boton = document.getElementById(`boton${Elementos.id}`);
-    boton.addEventListener("click", () => {
+    
+    contenedorJuego.append(card2);
+    
+    const boton2 = document.getElementById(`boton${Elementos.id}`);
+    boton2.addEventListener("click", () => {
         contadorRondas();
-        accionAumentarRepeticion(Elementos.id);
-        cambiarElemento(Elementos.id);   
+        cambiarElemento2(Elementos.id);
+        botonCandidato(Elementos.repeticiones);   
     })
 }
 
-mostrarElementos2(iterar2);
-mostrarElementos(iterar);
+////////////////////////////////////////////////////EJECUCION/////////////////////////////////////////////////////////////////////
+
+menu();
+
+////////////////////////////////////////////////////FUNCIONES//////////////////////////////////////////////////////////////////////
+
+function menu(){
+    const contenedorMenu = document.getElementById("contenedorMenu");
+    contenedorMenu.innerHTML = `<div class="menu">
+                                    <div class="d-flex justify-content-center">
+                                        <img class="imagenMenu" src="../Multimedia/Principal/logo.png" alt="">
+                                    </div>
+
+                                    <div>
+                                        <h3 class=" titulosLg d-flex justify-content-center">IT'S THE BEST</h3>
+                                    </div>
+
+                                    <div class="boxBotonesMenu">
+
+                                        <button class="botonDefault">
+                                            <h3 id="botonAcciones">JUGAR</h3>
+                                        </button>
+
+                                        <button class="botonDefault">
+                                            <h3>FREE-FOR-ALL</h3>
+                                        </button>
+                                    </div>
+                                </div>
+                                `
+    contenedorJuego.append(contenedorMenu); 
+    
+    const botonAcciones = document.getElementById(`botonAcciones`);
+        botonAcciones.addEventListener("click", () => {
+            contenedorJuego.removeChild(contenedorMenu);
+            mostrarContenedorJuego();
+            primeraEtapa();
+        })  
+}
+
+function primeraEtapa() {
+    let iterar = randomArray(arrayAcciones);
+    let iterar2 = randomArray(arrayAcciones);
+    mostrarElementos(iterar);
+    mostrarElementos2(iterar2);
+}
 
 
-
-///////////////////////////////////////FUNCIONES/////////////////////////////////////////////////////////
-
-
-const accionAumentarRepeticion = (id) => {
+const  cambiarElemento1 = (id) => {
     const elementoDefinido = arrayAcciones.find((Elementos) => Elementos.id === id);
-    elementoDefinido.repeticiones++;
-        botonCandidato(elementoDefinido.repeticiones);
-}
-
- const  cambiarElemento = (id) => { 
-    const cambiarElElemento = arrayAcciones.find((Elementos) => Elementos.id === id);
-    console.log(cambiarElElemento);     
+    elementoDefinido.repeticiones++; 
     let cambiar = randomArray(arrayAcciones);
-    if (mostrarElementos.id == cambiarElElemento.id) {
-        mostrarElementos2(cambiar);  
-    }
-    else if (mostrarElementos2.id == cambiarElElemento.id) {
-        mostrarElementos(cambiar)
-    }
-    else if (mostrarElementos.id !== cambiarElElemento.id) {
-        mostrarElementos(cambiar)
-    }
-    else if (mostrarElementos2.id !== cambiarElElemento.id) {
-        mostrarElementos2(cambiar)
-    }
+    mostrarElementos2(cambiar);
 }
 
-const botonCandidato = (repeticiones) => {
-    const accionBotonCandidato = arrayAcciones.find((Elementos) => Elementos.repeticiones == repeticiones);
 
-    if (accionBotonCandidato.repeticiones >= 3){
-        boton.innerHTML = `<p>Elegir CANDIDATO</p>
-                            `
-        contenedorJuego.appendChild(boton);
-    }
+const  cambiarElemento2 = (id) => {
+    const elementoDefinido = arrayAcciones.find((Elementos) => Elementos.id === id);
+    elementoDefinido.repeticiones++;    
+    let cambiar = randomArray(arrayAcciones);
+    mostrarElementos(cambiar);
+    mostrarElementos2(elementoDefinido);
 }
 
-//CREAR PARA CADA ARRAY//
-function randomArray(arrayAcciones){
+function randomArray(){
     let random = Math.random()* arrayAcciones.length | 0;
     let valorRandom = arrayAcciones[random];
     return valorRandom;
@@ -189,12 +208,103 @@ function randomArray(arrayAcciones){
 
 
 function contadorRondas(){
+    const contador = document.getElementById("contador");
     cuenta++;
     contador.innerHTML = `
                         <div>
-                            <h3 class= "" >RONDA ${cuenta}</h3>
+                            <h3>RONDA ${cuenta}</h3>
                         </div>
                         `
 
-     contenedorJuego.appendChild(contador);
+     contenedorPrincipal.appendChild(contador);
+
+    if (cuenta === 31){
+        alert("Termino la PRIMERA ETAPA");
+        contenedorPrincipal.remove();
+        segundaEtapa();
+    }
+}
+
+function mostrarContenedorJuego(){
+    const contenedorPrincipal = document.getElementById("contenedorPrincipal");
+    contenedorPrincipal.innerHTML = `
+                                    <div id="cont" class="contenedorJuegoPrincipal">
+                                    <div class="rondas" id="contador">
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <img class="logoCENTROJuego" src="../Multimedia/Principal/logo.png" alt="">
+                                    </div>
+
+                                    <div class="esMejorQue">
+                                        <h3>ES MEJOR QUE..?</h3>
+                                    </div>
+
+                                    <button class="BotonCandidatos" id="candidatos">
+                                    </button>
+
+                                    </div>
+
+                                    <div class="candidatos d-flex justify-content-evenly align-items-center" id="contenedorCandidatos">
+                                    <div class="cajasCandidatos"></div>
+                                    <div class="cajasCandidatos"></div>
+                                    <div class="cajasCandidatos"></div>
+                                    <div class="cajasCandidatos"></div>
+                                    </div>
+                                    `
+    contenedorJuego.append(contenedorPrincipal); 
+}
+
+
+const botonCandidato = (repeticiones) => {
+const accionBotonCandidatos = arrayAcciones.find((Elementos) => Elementos.repeticiones === repeticiones);
+
+    if (accionBotonCandidatos.repeticiones >= 3){
+         candidatos.innerHTML = `<h3 class="titulosSmall"> CANDIDATO </h3>`
+        
+         contenedorPrincipal.appendChild(candidatos);
+
+        candidatos.addEventListener("click", () => {
+            seleccionCandidato(accionBotonCandidatos.id);
+        })  
+    }
+
+    else {
+        contenedorPrincipal.removeChild(candidatos);
+    }
+}
+
+const seleccionCandidato = (id) => {
+    const elementoDefinido = arrayAcciones.find((Elementos) => Elementos.id === id);
+    console.log(elementoDefinido);
+        let indice = arrayAcciones.indexOf(elementoDefinido);
+        arrayAcciones.splice (indice, 1);
+        console.log(arrayAcciones);
+    
+        iteracionNueva()
+
+        contenedorPrincipal.removeChild(candidatos);
+
+        guardarCandidato(elementoDefinido);
+}
+
+function guardarCandidato(elementoDefinido) {
+}
+
+function iteracionNueva() {
+    const iterarUno = randomArray(arrayAcciones);
+    const iterarDos = randomArray(arrayAcciones);
+
+    mostrarElementos(iterarUno);
+    mostrarElementos2(iterarDos);
+}
+
+function playPause() {
+    if(valor == 0){
+        valor = 1;
+        audio.play();
+    }else{
+        valor = 0;
+        audio.pause();
+    }
 }
