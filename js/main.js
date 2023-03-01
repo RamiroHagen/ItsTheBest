@@ -86,8 +86,8 @@ const card2 = document.getElementById("card2");
 const contenedorJuego = document.getElementById("contenedorJuego");
 const candidatos = document.getElementById("candidatos");
 const contenedorCandidatos = document.getElementById("contenedorCandidatos");
-let audio = document.getElementById("audio");
-let playPauseBtn = document.getElementById("playPauseBtn");
+const audio = document.getElementById("audio");
+const playPauseBtn = document.getElementById("playPauseBtn");
 const listaCandidatos = [];
 
 //////////////////////////////////////////////////////////CARDS//////////////////////////////////////////////////////////
@@ -154,6 +154,16 @@ function menu(){
                                         <h3 class=" titulosLg d-flex justify-content-center">IT'S THE BEST</h3>
                                     </div>
 
+                                    <div>
+                                        <audio id="audio">
+                                            <source src="../Multimedia/JazzHop.mp3" type="audio/mp3">
+                                        </audio>
+
+                                        <button class="tamañoPlayMuteMenu" id="playPauseBtn" onclick="playPause()">
+                                            <img  width="35px" height="35px" src="../Multimedia/Principal/volume-play.png" alt="Play y Mute Musica">
+                                        </button>
+                                    </div>
+
                                     <div class="boxBotonesMenu">
 
                                         <button class="botonDefault">
@@ -206,7 +216,6 @@ function randomArray(){
     return valorRandom;
 }
 
-
 function contadorRondas(){
     const contador = document.getElementById("contador");
     cuenta++;
@@ -229,27 +238,37 @@ function mostrarContenedorJuego(){
     const contenedorPrincipal = document.getElementById("contenedorPrincipal");
     contenedorPrincipal.innerHTML = `
                                     <div id="cont" class="contenedorJuegoPrincipal">
-                                    <div class="rondas" id="contador">
-                                    </div>
+                                        <div class="rondas" id="contador">
+                                        </div>
 
-                                    <div class="d-flex justify-content-center">
-                                        <img class="logoCENTROJuego" src="../Multimedia/Principal/logo.png" alt="">
-                                    </div>
+                                        <div class="d-flex justify-content-center">
+                                            <img class="logoCENTROJuego" src="../Multimedia/Principal/logo.png" alt="">
+                                        </div>
 
-                                    <div class="esMejorQue">
-                                        <h3>ES MEJOR QUE..?</h3>
-                                    </div>
+                                        <div class="esMejorQue">
+                                            <h3>ES MEJOR QUE..?</h3>
+                                        </div>
 
-                                    <button class="BotonCandidatos" id="candidatos">
-                                    </button>
+                                        <button class="BotonCandidatos" id="candidatos">
+                                        </button>
 
-                                    </div>
+                                        </div>
 
-                                    <div class="candidatos d-flex justify-content-evenly align-items-center" id="contenedorCandidatos">
-                                    <div class="cajasCandidatos"></div>
-                                    <div class="cajasCandidatos"></div>
-                                    <div class="cajasCandidatos"></div>
-                                    <div class="cajasCandidatos"></div>
+                                        <div>
+                                            <audio id="audio">
+                                                <source src="../Multimedia/JazzHop.mp3" type="audio/mp3">
+                                            </audio>
+
+                                            <button class="tamañoPlayMuteJuego" id="playPauseBtn" onclick="playPause()">
+                                                <img width="35px" height="35px" src="../Multimedia/Principal/volume-play.png" alt="Play y Mute Musica">
+                                            </button>
+                                        </div>
+
+                                        <div class="candidatos d-flex justify-content-evenly align-items-center" id="contenedorCandidatos">
+                                            <div class="cajasCandidatos"></div>
+                                            <div class="cajasCandidatos"></div>
+                                            <div class="cajasCandidatos"></div>
+                                            <div class="cajasCandidatos"></div>
                                     </div>
                                     `
     contenedorJuego.append(contenedorPrincipal); 
@@ -271,24 +290,34 @@ const accionBotonCandidatos = arrayAcciones.find((Elementos) => Elementos.repeti
 
     else {
         contenedorPrincipal.removeChild(candidatos);
+
     }
 }
 
 const seleccionCandidato = (id) => {
     const elementoDefinido = arrayAcciones.find((Elementos) => Elementos.id === id);
     console.log(elementoDefinido);
-        let indice = arrayAcciones.indexOf(elementoDefinido);
-        arrayAcciones.splice (indice, 1);
-        console.log(arrayAcciones);
+        if(elementoDefinido == undefined){
+
+        }else if(elementoDefinido.repeticiones >= 3 && elementoDefinido.id === id){
+            let indice = arrayAcciones.indexOf(elementoDefinido);
+            arrayAcciones.splice (indice, 1);
+            console.log(arrayAcciones);
+        
+            iteracionNueva()
     
-        iteracionNueva()
+            contenedorPrincipal.removeChild(candidatos);
+    
+            guardarCandidato(elementoDefinido);
+        }
 
-        contenedorPrincipal.removeChild(candidatos);
 
-        guardarCandidato(elementoDefinido);
 }
 
 function guardarCandidato(elementoDefinido) {
+    listaCandidatos.push(elementoDefinido);
+    console.log(listaCandidatos);
+
 }
 
 function iteracionNueva() {
@@ -299,12 +328,24 @@ function iteracionNueva() {
     mostrarElementos2(iterarDos);
 }
 
+//LocalStorage
 function playPause() {
     if(valor == 0){
         valor = 1;
         audio.play();
+        localStorage.setItem("reproduccion", 1);
     }else{
         valor = 0;
-        audio.pause();
+        audio.pause();  
+        localStorage.setItem("reproduccion", 0);
     }
+}
+
+const reproduccion = localStorage.getItem("reproduccion");
+if(reproduccion == 1){
+    valor = 0;
+    playPause();
+}
+
+function segundaEtapa(){
 }
